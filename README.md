@@ -19,20 +19,24 @@ Hello, my name is Drew Chase, I am a software engineer from the United States.  
 
 ## Frameworks:
 1. NodeJS
-2. WPF
-3. UWP
-4. WinForms
-5. ASP.net
-6. LWGJL
-7. DirectX
-8. OpenGL
-9. Electron
-10. ImGUI
-11. Unreal Engine (Kind of a framework I guess)
+2. .NET
+3. WPF
+4. UWP
+5. WinForms
+6. ASP.net
+7. LWGJL
+8. DirectX
+9. OpenGL
+10. Electron
+11. ImGUI
+12. Unreal Engine (Kind of a framework I guess)
+13. .NET MAUI
 
 ## IDE's / Code Editors:
 1. Visual Studio
 2. VS Code
+3. IntelliJ
+4. PHPStorm
 
 ## Tools:
 1. CMake
