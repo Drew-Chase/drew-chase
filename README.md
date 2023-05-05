@@ -1,5 +1,6 @@
 # About
 ![Page Views](https://komarev.com/ghpvc/?username=dcmanproductions&label=Profile%20views&color=0e75b6&style=flat)   
+[![Curse Forge](https://cf.way2muchnoise.eu/author/DrewChase.svg)](https://legacy.curseforge.com/members/DrewChase/projects)   
 Hello, my name is Drew Chase, I am a software engineer from the United States.  I develop primarily in C#.  I started programming in 2007 with Java.
 
 ## Statistics
