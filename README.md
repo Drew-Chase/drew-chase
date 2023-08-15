@@ -32,6 +32,8 @@ Hello, my name is Drew Chase, I am a software engineer from the United States.  
 11. ImGUI
 12. Unreal Engine (Kind of a framework I guess)
 13. .NET MAUI
+14. Blazor
+15. WASM
 
 ## IDE's / Code Editors:
 1. Visual Studio
