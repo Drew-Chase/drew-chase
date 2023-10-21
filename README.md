@@ -1,13 +1,13 @@
 # About
-![Page Views](https://komarev.com/ghpvc/?username=dcmanproductions&label=Profile%20views&color=0e75b6&style=flat)   
+![Page Views](https://komarev.com/ghpvc/?username=drew-chase&label=Profile%20views&color=0e75b6&style=flat)   
 [![Curse Forge](https://cf.way2muchnoise.eu/author/DrewChase.svg)](https://legacy.curseforge.com/members/DrewChase/projects)   
 Hello, my name is Drew Chase, I am a software engineer from the United States.  I develop primarily in C#.  I started programming in 2007 with Java.
 
 ## Statistics
-![Streaks](https://github-readme-streak-stats.herokuapp.com/?user=dcmanproductions&theme=radical&hide_border=true)
-![Github stats](https://github-readme-stats.vercel.app/api?username=dcmanproductions&theme=radical&show_icons=true&count_private=true&include_all_commits=true&hide_border=true)
-![Top Languages Card](https://github-readme-stats.vercel.app/api/top-langs/?username=dcmanproductions&theme=radical&hide_border=true)
-![Trophies](https://github-profile-trophy.vercel.app/?username=dcmanproductions&theme=radical)   
+![Streaks](https://github-readme-streak-stats.herokuapp.com/?user=drew-chase&theme=radical&hide_border=true)
+![Github stats](https://github-readme-stats.vercel.app/api?username=drew-chase&theme=radical&show_icons=true&count_private=true&include_all_commits=true&hide_border=true)
+![Top Languages Card](https://github-readme-stats.vercel.app/api/top-langs/?username=drew-chase&theme=radical&hide_border=true)
+![Trophies](https://github-profile-trophy.vercel.app/?username=drew-chase&theme=radical)   
 
 
 ## Languages:
@@ -17,6 +17,7 @@ Hello, my name is Drew Chase, I am a software engineer from the United States.  
 4. C
 5. WEB (HTML, CSS, PHP, JavaScript)
 6. Python
+7. Rust
 
 ## Frameworks:
 1. NodeJS
@@ -37,9 +38,11 @@ Hello, my name is Drew Chase, I am a software engineer from the United States.  
 
 ## IDE's / Code Editors:
 1. Visual Studio
-2. VS Code
+2. VSCode
 3. IntelliJ
 4. PHPStorm
+5. Clion
+6. RustRover
 
 ## Tools:
 1. CMake
