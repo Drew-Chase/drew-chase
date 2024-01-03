@@ -6,7 +6,7 @@ Hello, my name is Drew Chase, I am a software engineer from the United States.  
 ## Statistics
 ![Streaks](https://github-readme-streak-stats.herokuapp.com/?user=drew-chase&theme=radical&hide_border=true)
 ![Github stats](https://github-readme-stats.vercel.app/api?username=drew-chase&theme=radical&show_icons=true&count_private=true&include_all_commits=true&hide_border=true)
-![Top Languages Card](https://github-readme-stats.vercel.app/api/top-langs/?username=drew-chase&theme=radical&hide_border=true)
+![Top Languages Card](https://github-readme-stats.vercel.app/api/top-langs/?username=drew-chase&theme=radical&hide_border=true&hide=CSS,ShaderLab,HTML,HLSL)
 ![Trophies](https://github-profile-trophy.vercel.app/?username=drew-chase&theme=radical)   
 
 
