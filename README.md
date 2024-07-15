@@ -7,7 +7,7 @@
 
 - 🔭 I’m currently working on [an SFTP/FTP Editor](https://github.com/Drew-Chase/sftp-editor)
 
-- 🌱 I’m currently learning **Rust**
+- 🌱 I’m currently learning **Rust** and **C++**
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
