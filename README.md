@@ -34,11 +34,11 @@ Feel free to connect with me on [LinkedIn](https://linkedin.com/in/drew-chase-76
 - ImGUI
 - Unreal Engine
 - Unity
+- TAURI
 
 ## Skilled in following IDE's / Code Editors
 - Visual Studio and VSCode
-- IntelliJ, PHPStorm, and Clion
-- RustRover
+- JetBrains IDE's (PHPStorm, Rider, CLion, RustRover, etc)
 
 ## Capable in following Tools
 - CMake and Visual Assist
