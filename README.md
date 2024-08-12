@@ -9,6 +9,7 @@
 ## A bit about me
 - Currently, I am working on an impressive [SFTP/FTP Editor](https://github.com/Drew-Chase/sftp-editor)
 - To keep up with the evolving tech industry, I am enhancing my skills in **Rust** and **C++** technologies.
+-   I'm currently working at [Mardens Inc.](https://mardens.com) as their lead software engineer.
 
 ## Reach out to me
 Feel free to connect with me on [LinkedIn](https://linkedin.com/in/drew-chase-762998171) or follow me on [YouTube](https://www.youtube.com/c/@drew-chase)
