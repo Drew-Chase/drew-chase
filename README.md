@@ -12,7 +12,7 @@
 -   I'm currently working at [Mardens Inc.](https://mardens.com) as their lead software engineer.
 
 ## Reach out to me
-Feel free to connect with me on [LinkedIn](https://linkedin.com/in/drew-chase-762998171) or follow me on [YouTube](https://www.youtube.com/c/@drew-chase)
+Feel free to connect with me on [LinkedIn](https://linkedin.com/in/drew-chase-762998171) or follow me on [YouTube](https://www.youtube.com/@drew-chase)
 
 ## Proficient in following Languages and Tools
 - Java
