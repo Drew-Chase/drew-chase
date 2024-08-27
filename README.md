@@ -49,7 +49,7 @@ Feel free to connect with me on [LinkedIn](https://linkedin.com/in/drew-chase-76
 - Multiple Linux configurations including ARM, Intel x86, and AMD 64
 - MacOS Intel
 
-![My Github Language Stats](https://github-readme-stats.vercel.app/api/top-langs?username=drew-chase&show_icons=true&theme=radical&locale=en&layout=compact)
+![My Github Language Stats](https://github-readme-stats.vercel.app/api/top-langs?username=drew-chase&show_icons=true&theme=radical&locale=en&layout=compact&hide=shaderlab,hlsl,css,html)
 
 ![My Github Stats](https://github-readme-stats.vercel.app/api?username=drew-chase&show_icons=true&theme=radical&locale=en)
 
