@@ -1,0 +1,150 @@
+@import "tailwindcss";
+@import "@heroui/styles";
+
+@theme {
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-base: #08080a;
+  --color-base-2: #0a0a0d;
+  --color-panel: #0c0c0f;
+  --color-panel-2: #111116;
+  --color-panel-3: #121216;
+  --color-ink: #f2f0ec;
+  --color-body: #b6b4bb;
+  --color-mute: #8b8992;
+  --color-dim: #6d6b74;
+  --color-faint: #57555e;
+  --color-accent: #ffb340;
+  --color-accent-hi: #ffd08a;
+  --color-signal: #4fd8e8;
+  --color-violet: #8b7fe8;
+  --color-mint: #5ae0a0;
+}
+
+/* HeroUI v3 token overrides — un-layered :root declarations win over HeroUI's layered defaults */
+:root,
+[data-theme="light"] {
+  --accent: #ffb340;
+  --accent-foreground: #08080a;
+  --background: #e3e3ea;
+  --foreground: #18181b;
+}
+
+.dark,
+[data-theme="dark"] {
+  --accent: #ffb340;
+  --accent-foreground: #08080a;
+  --background: #08080a;
+  --foreground: #f2f0ec;
+  --content1: #0c0c0f;
+  --content2: #121216;
+  --default-100: rgba(255, 255, 255, 0.08);
+  --default-200: rgba(255, 255, 255, 0.12);
+  --default-300: rgba(255, 255, 255, 0.16);
+  --divider: rgba(255, 255, 255, 0.08);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
+  background: #08080a;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 179, 64, 0.55) transparent;
+}
+
+body {
+  margin: 0;
+  background: #08080a;
+  color: #f2f0ec;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #ffb340;
+  color: #08080a;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #08080a;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 179, 64, 0.55);
+}
+
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+@keyframes drift {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(7px); }
+  100% { transform: translateY(0); }
+}
+@keyframes revealBlur {
+  from { opacity: 0; filter: blur(10px); transform: translateY(30px) scale(0.986); }
+  to { opacity: 1; filter: blur(0); transform: none; }
+}
+@keyframes ghostIn {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* pre-reveal state; useReveal swaps these for staggered revealBlur animations */
+.reveal-hidden > [data-stage] > * {
+  opacity: 0;
+}
+
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='160'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='.85'%20numOctaves='3'/%3E%3C/filter%3E%3Crect%20width='160'%20height='160'%20filter='url(%23n)'%20opacity='.45'/%3E%3C/svg%3E");
+}
+
+/* changelog markdown rendered from release bodies */
+.cl h1, .cl h2, .cl h3 {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #ffb340;
+  margin: 20px 0 8px;
+  font-weight: 500;
+}
+.cl p { margin: 0 0 10px; }
+.cl ul { margin: 0 0 12px; padding-left: 18px; }
+.cl li { margin: 0 0 5px; }
+.cl code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  background: rgba(255, 255, 255, 0.07);
+  padding: 2px 5px;
+  border-radius: 2px;
+  color: #4fd8e8;
+}
+.cl a { color: #4fd8e8; }
