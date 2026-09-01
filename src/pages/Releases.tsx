@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Input } from "@heroui/react";
 import { Link } from "react-router-dom";
 import {
   FEATURED,
@@ -144,10 +145,10 @@ export default function Releases() {
       <header className="p-[74px_34px_44px] border-b border-white/8">
         <div className="max-w-[1440px] mx-auto">
           <div className="font-mono text-[10px] tracking-[.26em] uppercase text-dim mb-[18px]">Index · Versions · Downloads</div>
-          <h1 className="font-display font-normal text-[clamp(44px,6.6vw,104px)] leading-[.96] tracking-[-.025em] mb-[24px]">
-            The whole<br /><span className="italic text-accent">paper trail.</span>
+          <h1 className="font-display font-extrabold text-[clamp(42px,8vw,132px)] leading-[.84] tracking-[-.045em] uppercase mb-[24px]">
+            The whole<br /><span className="text-accent">paper trail.</span>
           </h1>
-          <p className="max-w-[640px] text-[16px] leading-[1.66] text-[#a3a1a8] text-pretty">
+          <p className="max-w-[640px] text-[16px] leading-[1.66] text-body text-pretty">
             Every public repository, pulled live from GitHub. Expand a project to see its tagged versions, changelogs and downloadable build artifacts.
           </p>
         </div>
@@ -157,11 +158,13 @@ export default function Releases() {
         <aside className="sticky top-[61px] flex flex-col gap-[34px] border-r border-white/8 p-[34px_26px_60px_34px]">
           <div>
             <div className="font-mono text-[10px] tracking-[.2em] uppercase text-dim mb-[12px]">Search</div>
-            <input
+            <Input
+              aria-label="Search repositories"
+              type="text"
               value={query}
               onChange={e => setQuery(e.target.value)}
               placeholder="name, topic, language…"
-              className="w-full bg-panel border border-white/14 text-ink font-mono text-[12px] px-[12px] py-[11px] rounded-[2px] outline-none placeholder:text-faint focus:border-accent"
+              className="w-full rounded-[2px] border border-white/14 bg-panel px-[12px] py-[11px] font-mono text-[12px] text-ink shadow-none outline-none transition-none placeholder:text-faint hover:border-white/14 hover:bg-panel hover:shadow-none focus:border-accent focus:bg-panel focus:shadow-none focus:outline-none focus-visible:shadow-none"
             />
           </div>
 
@@ -189,7 +192,7 @@ export default function Releases() {
             <div className="flex flex-wrap gap-[6px]">
               {langChips.map(c => {
                 const on = lang === c.language;
-                const col = c.language ? (LANG_COLOR[c.language] || "#8b8992") : "#ffb340";
+                const col = c.language ? (LANG_COLOR[c.language] || "#7d7a80") : "#d8fb3c";
                 return (
                   <button
                     key={c.language ?? "all"}
@@ -198,7 +201,7 @@ export default function Releases() {
                     className="px-[10px] py-[6px] font-mono text-[10px] tracking-[.1em] uppercase rounded-[2px] cursor-pointer border"
                     style={{
                       background: on ? "rgba(255,255,255,.08)" : "transparent",
-                      color: on ? col : "#8b8992",
+                      color: on ? col : "#7d7a80",
                       borderColor: on ? col : "rgba(255,255,255,.12)",
                     }}
                   >
