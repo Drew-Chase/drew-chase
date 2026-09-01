@@ -14,7 +14,7 @@ export default function StackSection() {
         <section ref={ref} id="stack" data-panel="Stack" className="relative p-[110px_0] overflow-hidden">
             <div data-stage="1" className="px-[30px]">
                 <div className="font-mono text-[10px] tracking-[.3em] uppercase text-hot mb-[16px]">[ 03 ] Stack</div>
-                <h2 data-trace className="font-display font-extrabold text-[clamp(40px,7.4vw,128px)] leading-[.84] tracking-[-.04em] uppercase mb-[22px]">
+                <h2 data-trace className="font-display font-extrabold text-[min(7.2vw,128px)] leading-[.84] tracking-[-.04em] uppercase mb-[22px]">
                     <span className="block" data-line="ink" style={{WebkitTextStroke: "1.1px #f4f2ed"}}>What I</span>
                     <span className="block text-accent" data-line="acid" style={{WebkitTextStroke: "1.1px #d8fb3c"}}>reach for.</span>
                 </h2>
