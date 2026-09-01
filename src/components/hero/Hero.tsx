@@ -1,91 +1,145 @@
-import {useMemo} from "react";
+import {useEffect, useMemo, useRef} from "react";
 import {Link} from "react-router-dom";
 import * as gh from "../../lib/gh";
 import type {Repo} from "../../lib/gh";
 import Constellation from "./Constellation";
 
 export default function Hero({repos}: {repos: Repo[]}) {
+  const sectionRef = useRef<HTMLElement>(null);
   const signal = useMemo(() => repos.filter(gh.isSignal), [repos]);
-  const caption = signal.length ? `${signal.length} projects · hover a node` : "Mapping repositories…";
-  const legend = useMemo(
-    () =>
-      gh.languageBreakdown(signal)
-        .slice(0, 4)
-        .map(l => ({label: l.language, color: gh.LANG_COLOR[l.language] || "#6d6b74"})),
-    [signal]
-  );
+  const ticker = useMemo(() => {
+    const names = (signal.length ? signal : Array.from({length: 14}, () => ({name: "loading"})))
+      .slice(0, 22)
+      .map(r => r.name);
+    return [...names, ...names];
+  }, [signal]);
+
+  useEffect(() => {
+    const root = sectionRef.current;
+    if (!root) return;
+    const wired: HTMLElement[] = [];
+    const offs: (() => void)[] = [];
+    root.querySelectorAll<HTMLElement>("[data-magnet]").forEach(el => {
+      if (el.dataset.magnetWired) return;
+      el.dataset.magnetWired = "1";
+      wired.push(el);
+      el.style.transition = "transform .32s cubic-bezier(.16,1,.3,1), background .2s, border-color .2s, color .2s";
+      const move = (e: PointerEvent) => {
+        const b = el.getBoundingClientRect();
+        const dx = (e.clientX - (b.left + b.width / 2)) * 0.28;
+        const dy = (e.clientY - (b.top + b.height / 2)) * 0.42;
+        el.style.transform = `translate(${dx}px, ${dy}px)`;
+      };
+      const leave = () => {
+        el.style.transform = "translate(0,0)";
+      };
+      el.addEventListener("pointermove", move);
+      el.addEventListener("pointerleave", leave);
+      offs.push(() => {
+        el.removeEventListener("pointermove", move);
+        el.removeEventListener("pointerleave", leave);
+      });
+    });
+    return () => {
+      offs.forEach(fn => fn());
+      wired.forEach(el => delete el.dataset.magnetWired);
+    };
+  }, []);
 
   return (
-    <section id="top" data-panel="Intro" className="relative h-screen min-h-[680px] snap-start overflow-hidden">
+    <section
+      id="top"
+      data-panel="Intro"
+      ref={sectionRef}
+      className="relative flex min-h-screen flex-col justify-end overflow-hidden pt-[96px]"
+    >
       <Constellation repos={repos} />
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(70% 60% at 72% 40%, rgba(255,179,64,.1), transparent 62%), radial-gradient(130% 120% at 50% 50%, transparent 26%, rgba(8,8,10,.72) 100%), linear-gradient(90deg, rgba(8,8,10,.94) 0%, rgba(8,8,10,.5) 44%, transparent 74%), linear-gradient(180deg, rgba(8,8,10,.6) 0%, transparent 22%, rgba(8,8,10,.55) 92%, #08080a 100%)",
+            "radial-gradient(120% 100% at 50% 40%, transparent 20%, rgba(10,10,11,.62) 100%), linear-gradient(180deg, rgba(10,10,11,.7) 0%, transparent 26%, rgba(10,10,11,.86) 88%, #0a0a0b 100%)",
         }}
       />
-      <div className="pointer-events-none absolute inset-0 flex flex-col justify-center px-[34px]">
-        <div className="max-w-[1000px]" style={{animation: "riseIn .9s cubic-bezier(.16,1,.3,1) both"}}>
-          <div className="mb-[26px] flex items-center gap-3 font-mono text-[11px] uppercase tracking-[.24em] text-accent">
-            <span className="size-1.5 rounded-full bg-accent" style={{animation: "blink 2.4s ease-in-out infinite"}} />
-            Lead Software Engineer · Winslow, Maine
-          </div>
-          <h1
-            className="mb-7 font-display font-normal leading-[.92] tracking-[-.02em] text-balance text-ink"
-            style={{fontSize: "clamp(52px, 8.4vw, 140px)"}}
+      <div className="pointer-events-none relative p-[0_30px_30px]">
+        <div
+          className="mb-[clamp(14px,2.6vh,26px)] flex items-center gap-[14px] font-mono text-[10px] uppercase tracking-[.28em] text-accent"
+          style={{animation: "riseIn .7s cubic-bezier(.16,1,.3,1) 1.95s both"}}
+        >
+          <span className="h-[7px] w-[7px] rounded-full bg-accent" style={{animation: "blink 2.2s ease-in-out infinite"}} />
+          Lead Software Engineer · Winslow, Maine · Est. 2016
+        </div>
+        <h1
+          className="mb-[clamp(18px,3vh,30px)] font-display font-extrabold uppercase leading-[.84] tracking-[-.045em] text-[clamp(38px,min(9.6vw,15.5vh),200px)]"
+        >
+          <span className="flex gap-[0_.26em] whitespace-nowrap">
+            <span className="inline-block" style={{WebkitTextStroke: "1.2px #f4f2ed", animation: "traceInk 1.15s cubic-bezier(.5,0,.2,1) 2.05s both"}}>
+              Full
+            </span>
+            <span className="inline-block" style={{WebkitTextStroke: "1.2px #f4f2ed", animation: "traceInk 1.15s cubic-bezier(.5,0,.2,1) 2.22s both"}}>
+              stack,
+            </span>
+          </span>
+          <span className="flex gap-[0_.26em] whitespace-nowrap text-accent">
+            <span className="inline-block" style={{WebkitTextStroke: "1.2px #d8fb3c", animation: "traceAcid 1.15s cubic-bezier(.5,0,.2,1) 2.42s both"}}>
+              all
+            </span>
+            <span className="inline-block" style={{WebkitTextStroke: "1.2px #d8fb3c", animation: "traceAcid 1.15s cubic-bezier(.5,0,.2,1) 2.56s both"}}>
+              the
+            </span>
+            <span className="inline-block" style={{WebkitTextStroke: "1.2px #d8fb3c", animation: "traceAcid 1.15s cubic-bezier(.5,0,.2,1) 2.7s both"}}>
+              way
+            </span>
+          </span>
+          <span
+            className="block"
+            style={{WebkitTextStroke: "1.4px #f4f2ed", WebkitTextFillColor: "transparent", animation: "traceGhost .9s cubic-bezier(.5,0,.2,1) 2.92s both"}}
           >
-            Full stack,
-            <br />
-            <i className="text-accent">all the way</i> down.
-          </h1>
-          <p
-            className="mb-[38px] max-w-[620px] text-pretty leading-[1.6] text-body"
-            style={{fontSize: "clamp(16px, 1.35vw, 20px)"}}
-          >
-            Rust systems work, full-stack web, and the infrastructure underneath both. Sole owner of the stack for a
-            15-store retail chain — backend, frontend, mobile, desktop, and deploys.
+            down.
+          </span>
+        </h1>
+        <div
+          className="grid grid-cols-[minmax(0,1fr)_auto] items-end gap-[40px] border-t border-white/14 pt-[22px]"
+          style={{animation: "riseIn .8s cubic-bezier(.16,1,.3,1) 3.3s both"}}
+        >
+          <p className="max-w-[560px] text-pretty leading-[1.6] text-body text-[clamp(14px,1.2vw,17px)]">
+            Rust systems work, full-stack web, and the infrastructure underneath both. I own the entire stack for a 15-store retail chain — backend, frontend, mobile, desktop, deploys.
           </p>
-          <div className="pointer-events-auto flex flex-wrap gap-3">
+          <div className="pointer-events-auto flex gap-[10px]">
             <a
               href="#work"
-              className="inline-flex items-center gap-2.5 rounded-[2px] bg-ink px-[22px] py-3.5 font-mono text-[11px] font-medium uppercase tracking-[.16em] text-[#08080a] transition-colors hover:bg-accent"
+              data-magnet="1"
+              className="inline-flex items-center gap-[10px] bg-accent p-[15px_24px] font-mono text-[10.5px] font-bold uppercase tracking-[.18em] text-[#0a0a0b] hover:bg-ink"
             >
-              See the work →
+              The work →
             </a>
             <Link
               to="/releases"
-              className="inline-flex items-center gap-2.5 rounded-[2px] border border-white/18 px-[22px] py-3.5 font-mono text-[11px] uppercase tracking-[.16em] text-ink transition-colors hover:border-accent hover:text-accent"
+              data-magnet="1"
+              className="inline-flex items-center gap-[10px] border border-white/20 p-[15px_24px] font-mono text-[10.5px] uppercase tracking-[.18em] text-ink hover:border-accent hover:text-accent"
             >
-              Releases &amp; downloads
+              Downloads
             </Link>
           </div>
         </div>
       </div>
       <div
-        className="absolute bottom-[30px] left-[34px] flex items-end gap-7 font-mono text-[10px] uppercase tracking-[.16em] text-dim"
-        style={{animation: "fadeIn 1.6s ease both"}}
+        className="relative overflow-hidden border-b border-t border-white/14 bg-base"
+        style={{animation: "riseIn .8s cubic-bezier(.16,1,.3,1) 3.5s both"}}
       >
-        <div className="flex flex-col gap-1.5">
-          <span className="text-[#a3a1a8]">Project constellation</span>
-          <span>{caption}</span>
-        </div>
-        <div className="flex items-center gap-3.5">
-          {legend.map(l => (
-            <span key={l.label} className="flex items-center gap-[7px]">
-              <span className="size-[7px] rounded-full" style={{background: l.color}} />
-              <span>{l.label}</span>
+        <div className="flex w-max" style={{animation: "marq 42s linear infinite", willChange: "transform"}}>
+          {ticker.map((label, i) => (
+            <span
+              key={i}
+              className="flex items-center gap-[18px] whitespace-nowrap p-[12px_18px] font-mono text-[11px] uppercase tracking-[.16em]"
+              style={{color: i % 4 === 1 ? "#d8fb3c" : "#6b686f"}}
+            >
+              {label}
+              <span style={{color: "#34333a"}}>/</span>
             </span>
           ))}
         </div>
-      </div>
-      <div
-        className="absolute bottom-[30px] right-[34px] flex flex-col items-center gap-2 font-mono text-[9px] uppercase tracking-[.2em] text-dim"
-        style={{animation: "drift 3.4s ease-in-out infinite"}}
-      >
-        <span>scroll</span>
-        <span className="h-[34px] w-px" style={{background: "linear-gradient(180deg, #6d6b74, transparent)"}} />
       </div>
     </section>
   );

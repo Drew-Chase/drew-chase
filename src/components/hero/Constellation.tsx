@@ -6,14 +6,13 @@ interface Star {
   name: string;
   language?: string;
   stars: number;
-  pushed_at?: string;
+  url?: string;
 }
 
 interface TipData {
   name: string;
   language: string;
   stars: number;
-  pushed: string;
 }
 
 export default function Constellation({repos}: {repos: Repo[]}) {
@@ -44,7 +43,7 @@ export default function Constellation({repos}: {repos: Repo[]}) {
         const BX = 26, BY = 14, BZ = 15;
 
         const scene = new THREE.Scene();
-        scene.fog = new THREE.FogExp2(0x08080a, 0.026);
+        scene.fog = new THREE.FogExp2(0x0a0a0b, 0.026);
         const cam = new THREE.PerspectiveCamera(44, host.clientWidth / Math.max(1, host.clientHeight), 0.1, 200);
         cam.position.set(0, 0, 23);
         const renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
@@ -60,6 +59,7 @@ export default function Constellation({repos}: {repos: Repo[]}) {
         const siz = new Float32Array(n);
         const vel: {x: number; y: number; z: number}[] = [];
         const maxStars = Math.max(1, ...nodes.map(d => d.stars || 0));
+        const acc = new THREE.Color("#d8fb3c");
 
         nodes.forEach((d, i) => {
           pos[i * 3] = (Math.random() - 0.5) * BX;
@@ -70,14 +70,12 @@ export default function Constellation({repos}: {repos: Repo[]}) {
             y: (Math.random() - 0.5) * 0.009,
             z: (Math.random() - 0.5) * 0.011,
           });
-          const hex = (d.language && gh.LANG_COLOR[d.language]) || "#5a5c6e";
-          const c = new THREE.Color(hex);
-          if (!d.language) c.multiplyScalar(0.55);
+          const t = Math.log2(1 + (d.stars || 0)) / Math.log2(1 + maxStars);
+          const c = new THREE.Color(0x8d8a93).multiplyScalar(0.5 + t * 0.2).lerp(acc, Math.pow(t, 0.6));
           col[i * 3] = c.r;
           col[i * 3 + 1] = c.g;
           col[i * 3 + 2] = c.b;
-          const t = Math.log2(1 + (d.stars || 0)) / Math.log2(1 + maxStars);
-          siz[i] = 0.055 + t * 0.16 + Math.random() * 0.012;
+          siz[i] = 0.05 + t * 0.17 + Math.random() * 0.012;
         });
 
         const pg = new THREE.BufferGeometry();
@@ -113,7 +111,7 @@ export default function Constellation({repos}: {repos: Repo[]}) {
         const lm = new THREE.LineBasicMaterial({
           vertexColors: true,
           transparent: true,
-          opacity: 0.55,
+          opacity: 0.5,
           depthWrite: false,
           blending: THREE.AdditiveBlending,
         });
@@ -142,11 +140,18 @@ export default function Constellation({repos}: {repos: Repo[]}) {
             pg.attributes.aSize.needsUpdate = true;
             hoverIdx = -1;
           }
+          host.style.cursor = "default";
           setTip(null);
           if (tipRef.current) tipRef.current.style.opacity = "0";
         };
+        const onClick = () => {
+          const d = hoverIdx >= 0 ? nodes[hoverIdx] : null;
+          if (d && d.url) window.open(d.url, "_blank", "noopener");
+        };
+        host.style.cursor = "default";
         host.addEventListener("pointermove", onMove);
         host.addEventListener("pointerleave", onLeave);
+        host.addEventListener("click", onClick);
 
         const ray = new THREE.Raycaster();
         ray.params.Points.threshold = 0.55;
@@ -239,17 +244,15 @@ export default function Constellation({repos}: {repos: Repo[]}) {
               pg.attributes.aSize.needsUpdate = true;
               hoverIdx = idx;
               const d = idx >= 0 ? nodes[idx] : null;
-              setTip(
-                d && d.name
-                  ? {name: d.name, language: d.language || "—", stars: d.stars || 0, pushed: gh.relTime(d.pushed_at)}
-                  : null
-              );
+              setTip(d && d.name ? {name: d.name, language: d.language || "—", stars: d.stars || 0} : null);
             }
+            const named = idx >= 0 && !!nodes[idx].name;
+            host.style.cursor = named ? "pointer" : "default";
             const tipEl = tipRef.current;
             if (tipEl) {
-              if (idx >= 0 && nodes[idx].name) {
-                tipEl.style.left = Math.min(mouse.px + 16, host.clientWidth - 240) + "px";
-                tipEl.style.top = Math.max(mouse.py - 54, 8) + "px";
+              if (named) {
+                tipEl.style.left = Math.min(mouse.px + 18, host.clientWidth - 260) + "px";
+                tipEl.style.top = Math.max(mouse.py - 40, 8) + "px";
                 tipEl.style.opacity = "1";
               } else {
                 tipEl.style.opacity = "0";
@@ -267,6 +270,7 @@ export default function Constellation({repos}: {repos: Repo[]}) {
           ro.disconnect();
           host.removeEventListener("pointermove", onMove);
           host.removeEventListener("pointerleave", onLeave);
+          host.removeEventListener("click", onClick);
           pg.dispose();
           pm.dispose();
           lg.dispose();
@@ -291,15 +295,9 @@ export default function Constellation({repos}: {repos: Repo[]}) {
     <div ref={hostRef} className="absolute inset-0">
       <div
         ref={tipRef}
-        className="pointer-events-none absolute left-0 top-0 z-[5] whitespace-nowrap rounded-[2px] border border-white/16 bg-panel px-3 py-[9px] font-mono text-[10.5px] tracking-[.06em] text-ink opacity-0 shadow-[0_10px_30px_rgba(0,0,0,.6)] transition-opacity duration-[140ms]"
+        className="pointer-events-none absolute left-0 top-0 z-[5] whitespace-nowrap bg-accent p-[8px_12px] font-mono text-[10.5px] font-bold uppercase tracking-[.08em] text-[#0a0a0b] opacity-0 transition-opacity duration-[140ms]"
       >
-        {tip && (
-          <>
-            <div className="text-accent">{tip.name}</div>
-            <div className="mt-[3px] text-[#a3a1a8]">{tip.language} · ★ {tip.stars}</div>
-            <div className="mt-[3px] text-dim">pushed {tip.pushed}</div>
-          </>
-        )}
+        {tip ? `${tip.name} · ${tip.language} · ★ ${tip.stars}  ↗` : ""}
       </div>
     </div>
   );
