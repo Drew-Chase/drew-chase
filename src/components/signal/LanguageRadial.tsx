@@ -11,15 +11,17 @@ export default function LanguageRadial({ repos }: { repos: Repo[] }) {
     if (!host) return;
     let alive = true;
     let raf = 0;
-    let first = true;
+    let lastW = 0;
 
     const draw = async () => {
       const d3 = await import("d3");
       if (!alive || !repos.length) return;
       const data = languageBreakdown(repos.filter(isSignal)).slice(0, 9);
       if (!data.length) return;
-      host.innerHTML = "";
       const W = host.clientWidth || 520;
+      if (W === lastW) return;
+      lastW = W;
+      host.innerHTML = "";
       const H = Math.max(420, Math.min(520, W * 0.9));
       const R = Math.min(W, H) / 2 - 62;
       const R0 = R * 0.32;
@@ -116,16 +118,12 @@ export default function LanguageRadial({ repos }: { repos: Repo[] }) {
         .text("REPOS");
     };
 
-    void draw();
+    void draw().catch(() => undefined);
     const ro = new ResizeObserver(() => {
-      if (first) {
-        first = false;
-        return;
-      }
       if (raf) cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
         raf = 0;
-        if (alive) void draw();
+        if (alive) void draw().catch(() => undefined);
       });
     });
     ro.observe(host);

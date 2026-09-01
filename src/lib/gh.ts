@@ -235,7 +235,7 @@ export function languageBreakdown(repos: Repo[]): LangStat[] {
 export async function fetchActivity(): Promise<Activity> {
   const days = 91;
   const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  today.setUTCHours(0, 0, 0, 0);
   const byDay = new Map<string, { commits: number; repos: Set<string> }>();
   let source = "events";
   try {

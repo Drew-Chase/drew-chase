@@ -1,6 +1,5 @@
 import type {RefObject} from "react";
 import {useNavigate} from "react-router-dom";
-import {Button} from "@heroui/react";
 
 const LINKS = [
     {href: "#work", label: "Work"},
@@ -33,13 +32,13 @@ export default function Nav({progressRef}: {progressRef: RefObject<HTMLDivElemen
                             </a>
                         ))}
                     </div>
-                    <Button
-                        onPress={() => navigate("/releases")}
-                        variant="primary"
-                        className="ml-0 md:ml-[10px] h-auto rounded-[2px] px-[15px] py-[9px] font-mono text-[11px] font-medium tracking-[.16em] uppercase bg-accent text-[#08080a] hover:bg-accent-hi focus-visible:outline-none"
+                    <button
+                        type="button"
+                        onClick={() => navigate("/releases")}
+                        className="ml-0 md:ml-[10px] inline-flex cursor-pointer items-center justify-center whitespace-nowrap rounded-[2px] border-0 px-[15px] py-[9px] font-mono text-[11px] font-medium tracking-[.16em] uppercase bg-accent text-[#08080a] hover:bg-accent-hi focus-visible:outline-none"
                     >
                         All projects ↗
-                    </Button>
+                    </button>
                 </div>
             </nav>
         </>

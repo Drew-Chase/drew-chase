@@ -57,6 +57,7 @@ export default function Releases() {
 
   useEffect(() => {
     let alive = true;
+    const timers: number[] = [];
     void (async () => {
       void fetchProfile().then(p => { if (alive) setProfile(p); });
       const rs = await fetchRepos().catch(() => []);
@@ -64,9 +65,12 @@ export default function Releases() {
       reposRef.current = rs;
       setRepos(rs);
       setReady(true);
-      FEATURED.forEach((n, i) => { setTimeout(() => void fetchFor(n, true), i * 260); });
+      FEATURED.forEach((n, i) => { timers.push(window.setTimeout(() => void fetchFor(n, true), i * 260)); });
     })();
-    return () => { alive = false; };
+    return () => {
+      alive = false;
+      timers.forEach(t => clearTimeout(t));
+    };
   }, [fetchFor]);
 
   const filtered = useMemo(() => {

@@ -11,14 +11,16 @@ export default function ActivityChart({ activity }: { activity: Activity | null 
     if (!host || !activity) return;
     let alive = true;
     let raf = 0;
-    let first = true;
+    let lastW = 0;
 
     const draw = async () => {
       const d3 = await import("d3");
       if (!alive || !activity) return;
+      const W = host.clientWidth || 480;
+      if (W === lastW) return;
+      lastW = W;
       host.innerHTML = "";
       const days = activity.days.map(d => ({ ...d, dt: new Date(d.date + "T00:00:00") }));
-      const W = host.clientWidth || 480;
       const H = Math.max(420, Math.min(520, W * 0.9));
       const m = { t: 26, r: 8, b: 34, l: 34 };
       const svg = d3.select(host).append("svg").attr("width", W).attr("height", H).style("display", "block");
@@ -156,16 +158,12 @@ export default function ActivityChart({ activity }: { activity: Activity | null 
         .text("COMMITS / 90D");
     };
 
-    void draw();
+    void draw().catch(() => undefined);
     const ro = new ResizeObserver(() => {
-      if (first) {
-        first = false;
-        return;
-      }
       if (raf) cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
         raf = 0;
-        if (alive) void draw();
+        if (alive) void draw().catch(() => undefined);
       });
     });
     ro.observe(host);

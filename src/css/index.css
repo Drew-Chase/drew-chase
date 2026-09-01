@@ -3,68 +3,68 @@
 
 @theme {
   --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-display: "Syne", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
-  --color-base: #08080a;
-  --color-base-2: #0a0a0d;
-  --color-panel: #0c0c0f;
-  --color-panel-2: #111116;
-  --color-panel-3: #121216;
-  --color-ink: #f2f0ec;
-  --color-body: #b6b4bb;
-  --color-mute: #8b8992;
-  --color-dim: #6d6b74;
-  --color-faint: #57555e;
-  --color-accent: #ffb340;
-  --color-accent-hi: #ffd08a;
+  --color-base: #0a0a0b;
+  --color-base-2: #0d0d0f;
+  --color-slab: #0f1013;
+  --color-panel: #121214;
+  --color-panel-2: #17171a;
+  --color-panel-3: #131316;
+  --color-panel-4: #191920;
+  --color-ink: #f4f2ed;
+  --color-body: #a5a2a8;
+  --color-mute: #7d7a80;
+  --color-dim: #6b686f;
+  --color-faint: #4a484e;
+  --color-accent: #d8fb3c;
+  --color-accent-hi: #eaff8a;
+  --color-hot: #ff4b2b;
   --color-signal: #4fd8e8;
-  --color-violet: #8b7fe8;
-  --color-mint: #5ae0a0;
 }
 
 /* HeroUI v3 token overrides — un-layered :root declarations win over HeroUI's layered defaults */
 :root,
 [data-theme="light"] {
-  --accent: #ffb340;
-  --accent-foreground: #08080a;
+  --accent: #d8fb3c;
+  --accent-foreground: #0a0a0b;
   --background: #e3e3ea;
   --foreground: #18181b;
 }
 
 .dark,
 [data-theme="dark"] {
-  --accent: #ffb340;
-  --accent-foreground: #08080a;
-  --background: #08080a;
-  --foreground: #f2f0ec;
-  --content1: #0c0c0f;
-  --content2: #121216;
+  --accent: #d8fb3c;
+  --accent-foreground: #0a0a0b;
+  --background: #0a0a0b;
+  --foreground: #f4f2ed;
+  --content1: #121214;
+  --content2: #17171a;
   --default-100: rgba(255, 255, 255, 0.08);
   --default-200: rgba(255, 255, 255, 0.12);
   --default-300: rgba(255, 255, 255, 0.16);
-  --divider: rgba(255, 255, 255, 0.08);
+  --divider: rgba(255, 255, 255, 0.12);
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y proximity;
-  background: #08080a;
+  background: #0a0a0b;
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 179, 64, 0.55) transparent;
+  scrollbar-color: rgba(216, 251, 60, 0.5) transparent;
 }
 
 body {
   margin: 0;
-  background: #08080a;
-  color: #f2f0ec;
+  background: #0a0a0b;
+  color: #f4f2ed;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
 
 ::selection {
-  background: #ffb340;
-  color: #08080a;
+  background: #d8fb3c;
+  color: #0a0a0b;
 }
 
 ::-webkit-scrollbar {
@@ -72,47 +72,66 @@ body {
   height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #08080a;
+  background: #0a0a0b;
 }
 ::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.12);
   border-radius: 5px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 179, 64, 0.55);
+  background: rgba(216, 251, 60, 0.5);
 }
 
+@keyframes marq {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+@keyframes marqR {
+  from { transform: translate3d(-50%, 0, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
 @keyframes riseIn {
-  from { opacity: 0; transform: translateY(18px); }
+  from { opacity: 0; transform: translateY(26px); }
   to { opacity: 1; transform: none; }
 }
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+@keyframes revealBlur {
+  from { opacity: 0; filter: blur(12px); transform: translateY(34px); }
+  to { opacity: 1; filter: blur(0); transform: none; }
 }
 @keyframes blink {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.25; }
+  50% { opacity: 0.2; }
 }
-@keyframes drift {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(7px); }
-  100% { transform: translateY(0); }
-}
-@keyframes revealBlur {
-  from { opacity: 0; filter: blur(10px); transform: translateY(30px) scale(0.986); }
-  to { opacity: 1; filter: blur(0); transform: none; }
-}
-@keyframes ghostIn {
-  from { opacity: 0; transform: translateX(40px); }
-  to { opacity: 1; transform: none; }
+@keyframes bitroll {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
 }
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
+@keyframes curtainUp {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-101%); }
+}
+
+/* headline lines draw their outline left-to-right, then flood with fill */
+@keyframes traceInk {
+  0% { clip-path: inset(0 100% -18% 0); -webkit-text-fill-color: transparent; }
+  52% { clip-path: inset(0 0 -18% 0); -webkit-text-fill-color: transparent; }
+  100% { clip-path: inset(0 0 -18% 0); -webkit-text-fill-color: #f4f2ed; }
+}
+@keyframes traceAcid {
+  0% { clip-path: inset(0 100% -18% 0); -webkit-text-fill-color: transparent; }
+  52% { clip-path: inset(0 0 -18% 0); -webkit-text-fill-color: transparent; }
+  100% { clip-path: inset(0 0 -18% 0); -webkit-text-fill-color: #d8fb3c; }
+}
+@keyframes traceGhost {
+  0% { clip-path: inset(0 100% -18% 0); }
+  100% { clip-path: inset(0 0 -18% 0); }
+}
 
 /* pre-reveal state; useReveal swaps these for staggered revealBlur animations */
-.reveal-hidden > [data-stage] > * {
+.reveal-hidden [data-stage] > * {
   opacity: 0;
 }
 
@@ -120,10 +139,10 @@ body {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 60;
-  opacity: 0.5;
+  z-index: 90;
+  opacity: 0.55;
   mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='160'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='.85'%20numOctaves='3'/%3E%3C/filter%3E%3Crect%20width='160'%20height='160'%20filter='url(%23n)'%20opacity='.45'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='160'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='.85'%20numOctaves='3'/%3E%3C/filter%3E%3Crect%20width='160'%20height='160'%20filter='url(%23n)'%20opacity='.5'/%3E%3C/svg%3E");
 }
 
 /* changelog markdown rendered from release bodies */
@@ -132,7 +151,7 @@ body {
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #ffb340;
+  color: #d8fb3c;
   margin: 20px 0 8px;
   font-weight: 500;
 }

@@ -175,9 +175,9 @@ export default function Constellation({repos}: {repos: Repo[]}) {
 
           for (let i = 0; i < n; i++) {
             const v = vel[i];
-            let x = pos[i * 3] + v.x;
-            let y = pos[i * 3 + 1] + v.y;
-            let z = pos[i * 3 + 2] + v.z;
+            const x = pos[i * 3] + v.x;
+            const y = pos[i * 3 + 1] + v.y;
+            const z = pos[i * 3 + 2] + v.z;
             if (x < -BX / 2 || x > BX / 2) v.x *= -1;
             if (y < -BY / 2 || y > BY / 2) v.y *= -1;
             if (z < -BZ / 2 || z > BZ / 2) v.z *= -1;
@@ -274,7 +274,9 @@ export default function Constellation({repos}: {repos: Repo[]}) {
           renderer.dispose();
           renderer.domElement.remove();
         };
-      } catch {}
+      } catch {
+        // three.js failed to load; the hero's static gradient underneath stays visible
+      }
     })();
 
     return () => {

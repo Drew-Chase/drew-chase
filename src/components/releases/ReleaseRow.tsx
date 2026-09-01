@@ -3,7 +3,7 @@ import type { Release, Repo } from "../../lib/gh";
 
 function md(src: string): string {
   if (!src || !src.trim()) return '<p style="color:#57555e">No changelog was written for this release.</p>';
-  const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   const inline = (s: string) => esc(s)
     .replace(/`([^`]+)`/g, "<code>$1</code>")
     .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")

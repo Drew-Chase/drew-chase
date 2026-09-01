@@ -36,7 +36,7 @@ export default defineConfig({
         reportCompressedSize: true,
         rollupOptions: {
             output: {
-                advancedChunks: {
+                codeSplitting: {
                     groups: [
                         {
                             name: "react",
