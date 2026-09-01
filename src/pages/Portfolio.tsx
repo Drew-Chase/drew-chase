@@ -6,6 +6,7 @@ import Cursor from "../components/chrome/Cursor.tsx";
 import Hero from "../components/hero/Hero.tsx";
 import WorkSection from "../components/work/WorkSection.tsx";
 import SignalSection from "../components/signal/SignalSection.tsx";
+import BitField from "../components/signal/BitField.tsx";
 import StackSection from "../components/sections/StackSection.tsx";
 import AboutSection from "../components/sections/AboutSection.tsx";
 import ContactSection from "../components/sections/ContactSection.tsx";
@@ -49,9 +50,10 @@ export default function Portfolio() {
             <Hero repos={repos}/>
             <WorkSection repos={repos} profile={profile}/>
             <SignalSection repos={repos} activity={activity} profile={profile}/>
+            <BitField activity={activity}/>
             <StackSection/>
             <AboutSection years={years ?? "—"}/>
-            <ContactSection/>
+            <ContactSection repoCount={repos.length}/>
             <Footer note={note}/>
         </div>
     );
