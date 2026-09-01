@@ -6,6 +6,8 @@ import "./css/index.css";
 
 const Portfolio = React.lazy(() => import("./pages/Portfolio.tsx"));
 const Releases = React.lazy(() => import("./pages/Releases.tsx"));
+const Blog = React.lazy(() => import("./pages/Blog.tsx"));
+const NotFound = React.lazy(() => import("./pages/NotFound.tsx"));
 
 function ScrollToTop() {
     const {pathname} = useLocation();
@@ -23,7 +25,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                 <Routes>
                     <Route path="/" element={<Portfolio/>}/>
                     <Route path="/releases" element={<Releases/>}/>
-                    <Route path="*" element={<Portfolio/>}/>
+                    <Route path="/blog/*" element={<Blog/>}/>
+                    <Route path="*" element={<NotFound/>}/>
                 </Routes>
             </React.Suspense>
         </BrowserRouter>

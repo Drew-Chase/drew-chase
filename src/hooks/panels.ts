@@ -30,6 +30,7 @@ export function useReveal(ref: RefObject<HTMLElement | null>) {
     if (!panel || panel.dataset.revealed) return;
     const els = stageChildren(panel);
     const heads = [...panel.querySelectorAll<HTMLElement>("[data-trace]")];
+    if (!els.length && !heads.length) return;
 
     const trace = () => {
       for (const h of heads) {
