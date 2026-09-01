@@ -12,12 +12,14 @@ import StackSection from "../components/sections/StackSection.tsx";
 import AboutSection from "../components/sections/AboutSection.tsx";
 import ContactSection from "../components/sections/ContactSection.tsx";
 import {usePanels} from "../hooks/panels.ts";
+import {usePageMeta} from "../lib/meta.ts";
 import * as gh from "../lib/gh.ts";
 import type {Activity, Profile, Repo} from "../lib/gh.ts";
 
 const SECTION_IDS = ["top", "work", "signal", "stack", "about", "contact"];
 
 export default function Portfolio() {
+    usePageMeta("Drew Chase — Full Stack Engineer");
     const [repos, setRepos] = useState<Repo[]>([]);
     const [activity, setActivity] = useState<Activity | null>(null);
     const [profile, setProfile] = useState<Profile | null>(null);

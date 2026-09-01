@@ -1,8 +1,10 @@
 import {Link} from "react-router-dom";
 import Cursor from "../components/chrome/Cursor.tsx";
 import Magnet from "../components/chrome/Magnet.tsx";
+import {usePageMeta} from "../lib/meta.ts";
 
 export default function NotFound() {
+    usePageMeta("404 — Drew Chase");
     return (
         <main className="relative min-h-screen bg-base text-ink flex flex-col items-center justify-center gap-[34px] p-[30px] text-center overflow-hidden">
             <div className="noise-overlay" aria-hidden="true"/>

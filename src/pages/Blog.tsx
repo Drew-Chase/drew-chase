@@ -3,8 +3,10 @@ import {Link} from "react-router-dom";
 import Cursor from "../components/chrome/Cursor.tsx";
 import Magnet from "../components/chrome/Magnet.tsx";
 import {useReveal} from "../hooks/panels.ts";
+import {usePageMeta} from "../lib/meta.ts";
 
 export default function Blog() {
+    usePageMeta("Blog — Drew Chase", "Notes and build logs by Drew Chase.");
     const ref = useRef<HTMLElement>(null);
     useReveal(ref);
     return (
