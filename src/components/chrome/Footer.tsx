@@ -18,7 +18,7 @@ export default function Footer({note}: {note: string}) {
             <div className="border-t border-white/12 p-[22px_30px] flex items-center justify-between gap-[24px] flex-wrap font-mono text-[10px] tracking-[.18em] uppercase text-faint">
                 <span>© 2026 Drew Chase</span>
                 <span>{note}</span>
-                <Link to="/releases" className="text-mute hover:text-accent">
+                <Link to="/releases" data-magnet="1" className="text-mute hover:text-accent">
                     Projects &amp; releases ↗
                 </Link>
             </div>

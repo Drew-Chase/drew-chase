@@ -2,13 +2,15 @@ import {useEffect, useRef} from "react";
 
 const SLABS = ["#d8fb3c", "#0f1013", "#d8fb3c", "#0f1013", "#ff4b2b", "#0f1013", "#d8fb3c"];
 
-// Boot sequence: a counting loader (0-100 over 1.5s) above a 7-slab curtain
-// that sweeps up staggered once the counter finishes.
-export default function IntroVeil() {
+// Boot sequence: a counter rolling up to the public repo count over 1.5s
+// above a 7-slab curtain that sweeps up once the counter finishes.
+export default function IntroVeil({target}: {target?: number}) {
     const loaderRef = useRef<HTMLDivElement>(null);
     const counterRef = useRef<HTMLDivElement>(null);
     const barRef = useRef<HTMLDivElement>(null);
     const curtainRef = useRef<HTMLDivElement>(null);
+    const targetRef = useRef(target || 242);
+    targetRef.current = target || 242;
 
     useEffect(() => {
         let raf = 0;
@@ -16,7 +18,9 @@ export default function IntroVeil() {
         const step = () => {
             const p = Math.min(1, (performance.now() - t0) / 1500);
             const e = 1 - Math.pow(1 - p, 2.4);
-            if (counterRef.current) counterRef.current.textContent = String(Math.round(e * 100)).padStart(3, "0");
+            if (counterRef.current) {
+                counterRef.current.textContent = String(Math.round(e * targetRef.current)).padStart(3, "0");
+            }
             if (barRef.current) barRef.current.style.width = (e * 100).toFixed(1) + "%";
             if (p < 1) {
                 raf = requestAnimationFrame(step);

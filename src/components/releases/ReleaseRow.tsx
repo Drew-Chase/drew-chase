@@ -85,9 +85,9 @@ export default function ReleaseRow({ repo, index, open, loading, releases, onTog
           style={{ animation: "riseIn .4s cubic-bezier(.16,1,.3,1) both" }}
         >
           <div className="flex items-center gap-[14px] flex-wrap mb-[24px] font-mono text-[10px] tracking-[.16em] uppercase">
-            <a href={repo.url} target="_blank" rel="noreferrer" className={actionLink}>Repository ↗</a>
-            {repo.homepage && <a href={repo.homepage} target="_blank" rel="noreferrer" className={actionLink}>Live site ↗</a>}
-            <a href={`${repo.url}/archive/refs/heads/HEAD.zip`} className={actionLink}>Source ↓</a>
+            <a href={repo.url} target="_blank" rel="noreferrer" data-magnet="1" className={actionLink}>Repository ↗</a>
+            {repo.homepage && <a href={repo.homepage} target="_blank" rel="noreferrer" data-magnet="1" className={actionLink}>Live site ↗</a>}
+            <a href={`${repo.url}/archive/refs/heads/HEAD.zip`} data-magnet="1" className={actionLink}>Source ↓</a>
             <span className="text-faint">{meta}</span>
           </div>
 
@@ -134,6 +134,7 @@ export default function ReleaseRow({ repo, index, open, loading, releases, onTog
                         href={v.url}
                         target="_blank"
                         rel="noreferrer"
+                        data-magnet="1"
                         className="inline-block mt-[14px] font-mono text-[10px] tracking-[.12em] uppercase text-mute border-b border-white/20 hover:text-accent hover:border-accent"
                       >
                         On GitHub ↗

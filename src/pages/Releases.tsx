@@ -12,6 +12,7 @@ import {
 } from "../lib/gh";
 import type { Profile, Release, Repo } from "../lib/gh";
 import ReleaseRow from "../components/releases/ReleaseRow";
+import Magnet from "../components/chrome/Magnet";
 
 const SORTS = [
   { key: "pushed", label: "Recently pushed" },
@@ -130,13 +131,14 @@ export default function Releases() {
 
   return (
     <div className="min-h-screen bg-base text-ink">
+      <Magnet/>
       <nav className="sticky top-0 z-50 flex items-center justify-between gap-[24px] p-[16px_34px] bg-[rgba(8,8,10,.9)] backdrop-blur-[10px] border-b border-white/8">
-        <Link to="/" className="flex items-center gap-[12px] text-ink">
+        <Link to="/" data-magnet="1" className="flex items-center gap-[12px] text-ink">
           <span className="font-mono text-[11px] tracking-[.18em] uppercase text-mute">← Drew Chase</span>
         </Link>
         <div className="flex items-center gap-[16px] font-mono text-[10px] tracking-[.16em] uppercase text-dim">
           <span>{statusLine}</span>
-          <a href="https://github.com/Drew-Chase?tab=repositories" target="_blank" rel="noreferrer" className="text-mute hover:text-accent-hi">
+          <a href="https://github.com/Drew-Chase?tab=repositories" target="_blank" rel="noreferrer" data-magnet="1" className="text-mute hover:text-accent-hi">
             GitHub ↗
           </a>
         </div>
@@ -178,6 +180,7 @@ export default function Releases() {
                     key={s.key}
                     type="button"
                     onClick={() => setSort(s.key)}
+                    data-magnet="1"
                     className={`text-left border-0 px-[13px] py-[11px] font-mono text-[10.5px] tracking-[.14em] uppercase cursor-pointer ${on ? "bg-accent/12 text-accent" : "bg-panel text-mute"}`}
                   >
                     {s.label}
@@ -217,6 +220,7 @@ export default function Releases() {
             <button
               type="button"
               onClick={() => setScope(s => (s === "signal" ? "all" : "signal"))}
+              data-magnet="1"
               className="w-full text-left bg-panel border border-white/14 text-ink px-[12px] py-[11px] font-mono text-[10.5px] tracking-[.12em] uppercase rounded-[2px] cursor-pointer hover:border-accent"
             >
               {scopeLabel}
@@ -230,6 +234,7 @@ export default function Releases() {
             <button
               type="button"
               onClick={loadVisible}
+              data-magnet="1"
               className="w-full bg-accent/10 border border-accent/40 text-accent py-[12px] font-mono text-[10.5px] tracking-[.14em] uppercase rounded-[2px] cursor-pointer hover:bg-accent/18"
             >
               Scan visible for releases
@@ -270,7 +275,7 @@ export default function Releases() {
 
       <footer className="flex items-center justify-between gap-[24px] flex-wrap p-[28px_34px] border-t border-white/7 font-mono text-[10px] tracking-[.16em] uppercase text-faint">
         <span>© 2026 Drew Chase</span>
-        <Link to="/" className="text-mute hover:text-accent">← Back to the front</Link>
+        <Link to="/" data-magnet="1" className="text-mute hover:text-accent">← Back to the front</Link>
       </footer>
     </div>
   );

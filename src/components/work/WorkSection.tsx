@@ -31,6 +31,7 @@ export default function WorkSection({ repos, profile }: { repos: Repo[]; profile
           </div>
           <Link
             to="/releases"
+            data-magnet="1"
             className="border-b border-white/20 pb-[5px] font-mono text-[10.5px] tracking-[.18em] uppercase text-mute hover:border-accent hover:text-accent"
           >
             All {count} repositories ↗

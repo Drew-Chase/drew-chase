@@ -1,4 +1,4 @@
-import {useEffect, useMemo, useRef} from "react";
+import {useMemo, useRef} from "react";
 import {Link} from "react-router-dom";
 import * as gh from "../../lib/gh";
 import type {Repo} from "../../lib/gh";
@@ -13,38 +13,6 @@ export default function Hero({repos}: {repos: Repo[]}) {
       .map(r => r.name);
     return [...names, ...names];
   }, [signal]);
-
-  useEffect(() => {
-    const root = sectionRef.current;
-    if (!root) return;
-    const wired: HTMLElement[] = [];
-    const offs: (() => void)[] = [];
-    root.querySelectorAll<HTMLElement>("[data-magnet]").forEach(el => {
-      if (el.dataset.magnetWired) return;
-      el.dataset.magnetWired = "1";
-      wired.push(el);
-      el.style.transition = "transform .32s cubic-bezier(.16,1,.3,1), background .2s, border-color .2s, color .2s";
-      const move = (e: PointerEvent) => {
-        const b = el.getBoundingClientRect();
-        const dx = (e.clientX - (b.left + b.width / 2)) * 0.28;
-        const dy = (e.clientY - (b.top + b.height / 2)) * 0.42;
-        el.style.transform = `translate(${dx}px, ${dy}px)`;
-      };
-      const leave = () => {
-        el.style.transform = "translate(0,0)";
-      };
-      el.addEventListener("pointermove", move);
-      el.addEventListener("pointerleave", leave);
-      offs.push(() => {
-        el.removeEventListener("pointermove", move);
-        el.removeEventListener("pointerleave", leave);
-      });
-    });
-    return () => {
-      offs.forEach(fn => fn());
-      wired.forEach(el => delete el.dataset.magnetWired);
-    };
-  }, []);
 
   return (
     <section

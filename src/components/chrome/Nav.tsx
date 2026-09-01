@@ -33,7 +33,7 @@ export default function Nav({progressRef}: {progressRef: RefObject<HTMLDivElemen
                 </a>
                 <div className="hidden md:flex items-center gap-[3px] justify-self-center font-mono text-[10px] tracking-[.18em] uppercase">
                     {LINKS.map(l => (
-                        <a key={l.href} href={l.href} className="p-[8px_12px] text-[#7d7a80] hover:text-[#0a0a0b] hover:bg-accent">
+                        <a key={l.href} href={l.href} data-magnet="1" className="p-[8px_12px] text-[#7d7a80] hover:text-[#0a0a0b] hover:bg-accent">
                             {l.label}
                         </a>
                     ))}
@@ -42,6 +42,7 @@ export default function Nav({progressRef}: {progressRef: RefObject<HTMLDivElemen
                     <span className="font-mono text-[10px] tracking-[.16em] uppercase text-faint">{clock}</span>
                     <Button
                         onPress={() => navigate("/releases")}
+                        data-magnet="1"
                         className="inline-flex items-center gap-[8px] rounded-none px-[16px] py-[10px] h-auto min-w-0 bg-ink text-[#0a0a0b] font-mono text-[10px] font-bold tracking-[.16em] uppercase hover:bg-accent data-[hover=true]:bg-accent"
                     >
                         Index ↗

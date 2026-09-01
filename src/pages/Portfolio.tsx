@@ -3,6 +3,7 @@ import Nav from "../components/chrome/Nav.tsx";
 import Footer from "../components/chrome/Footer.tsx";
 import IntroVeil from "../components/chrome/IntroVeil.tsx";
 import Cursor from "../components/chrome/Cursor.tsx";
+import Magnet from "../components/chrome/Magnet.tsx";
 import Hero from "../components/hero/Hero.tsx";
 import WorkSection from "../components/work/WorkSection.tsx";
 import SignalSection from "../components/signal/SignalSection.tsx";
@@ -43,8 +44,9 @@ export default function Portfolio() {
     return (
         <div className="relative min-h-screen bg-base text-ink">
             <div className="noise-overlay" aria-hidden="true"/>
-            <IntroVeil/>
+            <IntroVeil target={repos.length || undefined}/>
             <Cursor/>
+            <Magnet/>
             <Nav progressRef={progressRef}/>
 
             <Hero repos={repos}/>
