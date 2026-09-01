@@ -131,32 +131,32 @@ export const FEATURED = [
 export const SEED: Record<string, { title: string; language: string; description: string; tags: string[] }> = {
   playarr: {
     title: "Playarr", language: "Rust",
-    description: "A self-hosted media dashboard that unifies Plex, Sonarr, Radarr, TMDB and popular download clients into a single interface. Rust backend, React frontend.",
+    description: "Self-hosted media dashboard unifying Plex, Sonarr, Radarr, TMDB and download clients.",
     tags: ["Rust", "React", "Self-hosted"],
   },
   "quay-sftp": {
     title: "Quay", language: "Rust",
-    description: "A modern SFTP, FTP and cloud storage explorer with a built-in shell and code editor — designed for keyboards, made for the dark.",
+    description: "Modern SFTP / FTP / cloud explorer with a built-in shell and code editor.",
     tags: ["Rust", "Iced", "Desktop"],
   },
   mush: {
     title: "Mush", language: "Rust",
-    description: "A fully cross-platform shell interpreter and drop-in replacement for PowerShell, BASH and ZSH.",
+    description: "Cross-platform shell interpreter — a drop-in replacement for PowerShell, BASH and ZSH.",
     tags: ["Rust", "Shell", "Cross-platform"],
   },
   "obsidian-server-panel": {
-    title: "Obsidian Panel", language: "Rust",
-    description: "A beautiful Minecraft server dashboard and management panel, with Git-based backups and an async scheduler underneath.",
+    title: "Obsidian", language: "Rust",
+    description: "Minecraft server panel with Git-based backups and an async scheduler underneath.",
     tags: ["Rust", "React", "Minecraft"],
   },
   sievemc: {
     title: "SieveMC", language: "Rust",
-    description: "CLI and desktop tool for detecting and filtering Minecraft mod jars by side — client-only, server-only, or both. Fabric, NeoForge and Forge.",
+    description: "Detects and filters Minecraft mod jars by side. Fabric, NeoForge and Forge.",
     tags: ["Rust", "CLI", "Tooling"],
   },
   serde_hash: {
     title: "serde_hash", language: "Rust",
-    description: "Seamlessly integrates HashIds with Serde — obfuscate numeric IDs in JSON output without touching your internal data structures.",
+    description: "HashIds wired into Serde — obfuscate numeric IDs without touching your structs.",
     tags: ["Rust", "Crate", "Serde"],
   },
 };

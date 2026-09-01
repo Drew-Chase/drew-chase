@@ -1,75 +1,81 @@
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { buildFeatured, type Profile, type Repo } from "../../lib/gh";
+import { useReveal } from "../../hooks/panels";
 
 export default function WorkSection({ repos, profile }: { repos: Repo[]; profile: Profile | null }) {
+  const ref = useRef<HTMLElement>(null);
+  useReveal(ref);
   const featured = buildFeatured(repos);
-  const count = profile?.public_repos || repos.length || "All";
+  const count = profile?.public_repos || repos.length || "242";
 
   return (
-    <section
-      id="work"
-      data-panel="Work"
-      className="relative min-h-screen snap-start overflow-hidden border-t border-white/7 pt-[130px] px-[34px] pb-[60px]"
-    >
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute top-[40px] right-[26px] font-display text-[min(26vw,380px)] leading-[.74] text-white/[.025] select-none"
-      >
-        01
-      </span>
-      <div data-stage="1" className="relative mx-auto max-w-[1360px]">
-        <div className="mb-[60px] flex flex-wrap items-baseline justify-between gap-[30px]">
+    <section ref={ref} id="work" data-panel="Work" className="relative overflow-hidden p-[110px_0_0]">
+      <div data-stage="1" className="px-[30px]">
+        <div className="flex flex-wrap items-end justify-between gap-[30px] border-b border-white/14 pb-[22px]">
           <div>
-            <div className="mb-[18px] font-mono text-[10px] tracking-[.26em] uppercase text-dim">
-              01 — Selected work
+            <div className="mb-[16px] font-mono text-[10px] tracking-[.3em] uppercase text-hot">
+              [ 01 ] Selected work
             </div>
-            <h2 className="m-0 font-display font-normal text-[length:clamp(38px,4.6vw,76px)] leading-none tracking-[-.02em]">
-              Things I built
-              <br />
-              <i className="text-accent">and actually use.</i>
+            <h2
+              data-trace
+              className="m-0 font-display font-extrabold text-[clamp(40px,7.4vw,128px)] leading-[.84] tracking-[-.04em] uppercase"
+            >
+              <span data-line="ink" className="block" style={{ WebkitTextStroke: "1.1px #f4f2ed" }}>
+                Built it.
+              </span>
+              <span data-line="acid" className="block text-accent" style={{ WebkitTextStroke: "1.1px #d8fb3c" }}>
+                Use it daily.
+              </span>
             </h2>
           </div>
           <Link
             to="/releases"
-            className="border-b border-white/20 pb-[4px] font-mono text-[11px] tracking-[.16em] text-[#a3a1a8] uppercase hover:border-accent hover:text-accent"
+            className="border-b border-white/20 pb-[5px] font-mono text-[10.5px] tracking-[.18em] uppercase text-mute hover:border-accent hover:text-accent"
           >
-            {count} repositories ↗
+            All {count} repositories ↗
           </Link>
         </div>
 
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(360px,1fr))] gap-px border border-white/8 bg-white/8">
+        <div data-stage="2" className="flex flex-col">
           {featured.map(p => (
             <a
               key={p.name}
               href={p.url}
               target="_blank"
               rel="noreferrer"
-              className="relative flex min-h-[300px] flex-col gap-5 bg-panel p-[34px_30px_30px] text-ink hover:bg-panel-3"
+              className="grid grid-cols-[74px_minmax(0,auto)_minmax(0,1fr)_118px_150px_40px] items-center gap-[22px] border-b border-white/12 p-[30px_16px] text-ink transition-[background,padding] duration-[250ms] hover:bg-accent hover:pl-[30px] hover:text-[#0a0a0b]"
             >
-              <div className="flex items-baseline justify-between gap-4 font-mono text-[10px] tracking-[.18em] uppercase text-dim">
-                <span>{p.index}</span>
-                <span style={{ color: p.langColor }}>{p.language}</span>
-              </div>
-              <h3 className="m-0 font-display font-normal text-[40px] leading-[1.02] tracking-[-.015em]">{p.title}</h3>
-              <p className="m-0 flex-1 text-pretty text-[14.5px] leading-[1.62] text-[#a3a1a8]">{p.description}</p>
-              <div className="flex flex-wrap gap-[6px]">
-                {p.tags.map(t => (
-                  <span
-                    key={t}
-                    className="rounded-[2px] border border-white/12 px-[9px] py-[5px] font-mono text-[9.5px] tracking-[.12em] text-mute uppercase"
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
-              <div className="flex items-center justify-between gap-4 border-t border-white/8 pt-[18px] font-mono text-[10px] tracking-[.14em] text-dim uppercase">
-                <span>
-                  ★ {p.stars} · {p.pushed}
-                </span>
-                <span className="text-accent">Source ↗</span>
-              </div>
+              <span className="font-mono text-[11px] tracking-[.16em] opacity-45">{p.index} —</span>
+              <span className="min-w-0 whitespace-nowrap font-display font-extrabold text-[clamp(20px,2.5vw,44px)] leading-[.95] tracking-[-.03em] uppercase">
+                {p.title}
+              </span>
+              <span className="min-w-0 text-[13px] leading-[1.5] opacity-62 [text-wrap:pretty]">
+                {p.description}
+              </span>
+              <span className="truncate font-mono text-[10.5px] tracking-[.14em] uppercase opacity-75">
+                {p.language}
+              </span>
+              <span className="whitespace-nowrap font-mono text-[10.5px] tracking-[.14em] opacity-55">
+                ★ {p.stars} · {p.pushed}
+              </span>
+              <span className="text-right font-display font-bold text-[26px]">↗</span>
             </a>
           ))}
+        </div>
+      </div>
+
+      <div className="mt-[90px] overflow-hidden border-t border-b border-white/14 bg-accent">
+        <div className="flex w-max" style={{ animation: "marq 26s linear infinite", willChange: "transform" }}>
+          <span className="whitespace-nowrap py-[14px] font-display font-extrabold text-[clamp(30px,5vw,76px)] leading-none tracking-[-.03em] uppercase text-[#0a0a0b]">
+            Rust · TypeScript · React · Docker · Rust · TypeScript · React · Docker ·&nbsp;
+          </span>
+          <span
+            aria-hidden="true"
+            className="whitespace-nowrap py-[14px] font-display font-extrabold text-[clamp(30px,5vw,76px)] leading-none tracking-[-.03em] uppercase text-[#0a0a0b]"
+          >
+            Rust · TypeScript · React · Docker · Rust · TypeScript · React · Docker ·&nbsp;
+          </span>
         </div>
       </div>
     </section>

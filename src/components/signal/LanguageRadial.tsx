@@ -1,7 +1,9 @@
 import { useEffect, useRef } from "react";
-import { isSignal, LANG_COLOR, languageBreakdown, type Repo } from "../../lib/gh";
+import { isSignal, languageBreakdown, type Repo } from "../../lib/gh";
 
 type Seg = ReturnType<typeof languageBreakdown>[number];
+
+const ACCENT = "#d8fb3c";
 
 export default function LanguageRadial({ repos }: { repos: Repo[] }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -23,8 +25,8 @@ export default function LanguageRadial({ repos }: { repos: Repo[] }) {
       lastW = W;
       host.innerHTML = "";
       const H = Math.max(420, Math.min(520, W * 0.9));
-      const R = Math.min(W, H) / 2 - 62;
-      const R0 = R * 0.32;
+      const R = Math.min(W, H) / 2 - 68;
+      const R0 = R * 0.34;
       const svg = d3
         .select(host)
         .append("svg")
@@ -35,7 +37,7 @@ export default function LanguageRadial({ repos }: { repos: Repo[] }) {
       const g = svg.append("g").attr("transform", `translate(${W / 2},${H / 2})`);
       const total = d3.sum(data, d => d.count);
       const maxC = d3.max(data, d => d.count) || 1;
-      const ang = d3.scaleBand<string>().domain(data.map(d => d.language)).range([0, Math.PI * 2]).padding(0.14);
+      const ang = d3.scaleBand<string>().domain(data.map(d => d.language)).range([0, Math.PI * 2]).padding(0.16);
       const rad = d3.scaleRadial().domain([0, maxC]).range([R0, R]);
 
       [0.25, 0.5, 0.75, 1].forEach(f => {
@@ -47,18 +49,17 @@ export default function LanguageRadial({ repos }: { repos: Repo[] }) {
         .innerRadius(R0)
         .startAngle(d => ang(d.language)!)
         .endAngle(d => ang(d.language)! + ang.bandwidth())
-        .padAngle(0.006)
-        .cornerRadius(1.5);
+        .padAngle(0.004);
 
       const paths = g
         .selectAll<SVGPathElement, Seg>("path.seg")
         .data(data)
         .join("path")
         .attr("class", "seg")
-        .attr("fill", d => LANG_COLOR[d.language] || "#6d6b74")
-        .attr("fill-opacity", 0.85)
-        .attr("d", d => arc.outerRadius(R0)(d))
-        .style("cursor", "default");
+        .attr("fill", (_, i) => (i === 0 ? ACCENT : "rgba(244,242,237,.16)"))
+        .attr("stroke", (_, i) => (i === 0 ? "none" : "rgba(244,242,237,.4)"))
+        .attr("stroke-width", 1)
+        .attr("d", d => arc.outerRadius(R0)(d) || "");
 
       paths
         .transition()
@@ -72,15 +73,18 @@ export default function LanguageRadial({ repos }: { repos: Repo[] }) {
 
       paths
         .on("mouseenter", function () {
-          d3.select(this).attr("fill-opacity", 1);
+          d3.select(this).attr("fill", ACCENT).attr("stroke", "none");
         })
-        .on("mouseleave", function () {
-          d3.select(this).attr("fill-opacity", 0.85);
+        .on("mouseleave", function (_e, d) {
+          const i = data.indexOf(d);
+          d3.select(this)
+            .attr("fill", i === 0 ? ACCENT : "rgba(244,242,237,.16)")
+            .attr("stroke", i === 0 ? "none" : "rgba(244,242,237,.4)");
         });
 
       data.forEach(d => {
         const a = ang(d.language)! + ang.bandwidth() / 2 - Math.PI / 2;
-        const r = rad(d.count) + 16;
+        const r = rad(d.count) + 17;
         const flip = Math.cos(a) < 0;
         g.append("text")
           .attr(
@@ -90,10 +94,10 @@ export default function LanguageRadial({ repos }: { repos: Repo[] }) {
           .attr("text-anchor", flip ? "end" : "start")
           .attr("dominant-baseline", "middle")
           .attr("font-family", "'JetBrains Mono', monospace")
-          .attr("font-size", 10.5)
-          .attr("letter-spacing", "0.1em")
-          .attr("fill", "#a3a1a8")
-          .text(`${d.language} ${d.count}`)
+          .attr("font-size", 10)
+          .attr("letter-spacing", "0.14em")
+          .attr("fill", "#8d8a93")
+          .text(`${d.language.toUpperCase()} ${d.count}`)
           .attr("opacity", 0)
           .transition()
           .delay(900)
@@ -103,18 +107,20 @@ export default function LanguageRadial({ repos }: { repos: Repo[] }) {
 
       g.append("text")
         .attr("text-anchor", "middle")
-        .attr("y", -4)
-        .attr("font-family", "'Instrument Serif', serif")
-        .attr("font-size", 40)
-        .attr("fill", "#f2f0ec")
+        .attr("y", 6)
+        .attr("font-family", "Syne, sans-serif")
+        .attr("font-weight", 800)
+        .attr("font-size", 46)
+        .attr("letter-spacing", "-0.04em")
+        .attr("fill", "#f4f2ed")
         .text(total);
       g.append("text")
         .attr("text-anchor", "middle")
-        .attr("y", 18)
+        .attr("y", 26)
         .attr("font-family", "'JetBrains Mono', monospace")
-        .attr("font-size", 9)
-        .attr("letter-spacing", "0.2em")
-        .attr("fill", "#6d6b74")
+        .attr("font-size", 8.5)
+        .attr("letter-spacing", "0.24em")
+        .attr("fill", "#4a484e")
         .text("REPOS");
     };
 
