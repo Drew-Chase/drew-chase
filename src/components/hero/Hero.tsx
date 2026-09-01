@@ -39,7 +39,7 @@ export default function Hero({repos}: {repos: Repo[]}) {
           Lead Software Engineer · Winslow, Maine · Est. 2016
         </div>
         <h1
-          className="mb-[clamp(18px,3vh,30px)] font-display font-extrabold uppercase leading-[.84] tracking-[-.045em] text-[clamp(38px,min(9.6vw,15.5vh),200px)]"
+          className="mb-[clamp(18px,3vh,30px)] font-display font-extrabold uppercase leading-[.84] tracking-[-.045em] text-[min(15.5vh,8vw,200px)] md:text-[min(15.5vh,8.7vw,200px)]"
         >
           <span className="flex gap-[0_.26em] whitespace-nowrap">
             <span className="inline-block" style={{WebkitTextStroke: "1.2px #f4f2ed", animation: "traceInk 1.15s cubic-bezier(.5,0,.2,1) 2.05s both"}}>
@@ -68,7 +68,7 @@ export default function Hero({repos}: {repos: Repo[]}) {
           </span>
         </h1>
         <div
-          className="grid grid-cols-[minmax(0,1fr)_auto] items-end gap-[40px] border-t border-white/14 pt-[22px]"
+          className="grid grid-cols-1 gap-[24px] border-t border-white/14 pt-[22px] sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end sm:gap-[40px]"
           style={{animation: "riseIn .8s cubic-bezier(.16,1,.3,1) 3.3s both"}}
         >
           <p className="max-w-[560px] text-pretty leading-[1.6] text-body text-[clamp(14px,1.2vw,17px)]">

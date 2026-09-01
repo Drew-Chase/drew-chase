@@ -48,12 +48,12 @@ export default function ReleaseRow({ repo, index, open, loading, releases, onTog
     <div className="bg-panel">
       <div
         onClick={() => onToggle(repo.name)}
-        className="grid grid-cols-[minmax(0,1fr)_auto] gap-[26px] items-start p-[24px_26px] cursor-pointer hover:bg-panel-2"
+        className="grid grid-cols-1 gap-[14px] p-[24px_26px] cursor-pointer hover:bg-panel-2 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start lg:gap-[26px]"
       >
         <div className="min-w-0">
           <div className="flex items-baseline gap-[12px] flex-wrap mb-[9px]">
             <span className="font-mono text-[10px] text-faint tracking-[.1em]">{String(index).padStart(3, "0")}</span>
-            <h2 className={`font-display font-extrabold text-[28px] leading-none tracking-[-.03em] uppercase ${open ? "text-accent" : "text-ink"}`}>
+            <h2 className={`min-w-0 break-words font-display font-extrabold text-[28px] leading-none tracking-[-.03em] uppercase ${open ? "text-accent" : "text-ink"}`}>
               {repo.name}
             </h2>
             {rel && rel.length > 0 && (
@@ -69,13 +69,13 @@ export default function ReleaseRow({ repo, index, open, loading, releases, onTog
           </div>
           <p className="text-[14px] leading-[1.6] text-mute max-w-[760px] text-pretty">{repo.description || "—"}</p>
         </div>
-        <div className="flex items-center gap-[22px] font-mono text-[10.5px] tracking-[.1em] text-dim whitespace-nowrap">
-          <span className="flex items-center gap-[7px]" style={{ color: langCol }}>
+        <div className="flex flex-wrap items-center gap-x-[22px] gap-y-[6px] font-mono text-[10.5px] tracking-[.1em] text-dim">
+          <span className="flex items-center gap-[7px] whitespace-nowrap" style={{ color: langCol }}>
             <span className="w-[7px] h-[7px] rounded-full" style={{ background: langCol }} />
             {repo.language || "—"}
           </span>
-          <span>★ {repo.stars}</span>
-          <span>{relTime(repo.pushed_at)}</span>
+          <span className="whitespace-nowrap">★ {repo.stars}</span>
+          <span className="whitespace-nowrap">{relTime(repo.pushed_at)}</span>
           <span className="text-[14px]" style={{ color: open ? "#d8fb3c" : "#4a484e" }}>{open ? "–" : "+"}</span>
         </div>
       </div>
@@ -115,8 +115,8 @@ export default function ReleaseRow({ repo, index, open, loading, releases, onTog
                   ? v.assets
                   : [{ name: `${repo.name}-${v.tag}-source.zip`, size: 0, downloads: 0, url: v.zip }];
                 return (
-                  <div key={`${vi}-${v.tag}`} className="bg-panel grid grid-cols-[210px_minmax(0,1fr)]">
-                    <div className="p-[24px] border-r border-white/7">
+                  <div key={`${vi}-${v.tag}`} className="bg-panel grid grid-cols-1 lg:grid-cols-[210px_minmax(0,1fr)]">
+                    <div className="p-[24px] border-b lg:border-b-0 border-white/7 lg:border-r">
                       <div className="flex items-baseline gap-[9px] flex-wrap mb-[12px]">
                         <span className="font-mono text-[17px] font-medium" style={{ color: vi === 0 ? "#d8fb3c" : "#f4f2ed" }}>{v.tag}</span>
                         {v.prerelease && (
@@ -152,7 +152,7 @@ export default function ReleaseRow({ repo, index, open, loading, releases, onTog
                           <a
                             key={`${ai}-${a.name}`}
                             href={a.url}
-                            className="grid grid-cols-[minmax(0,1fr)_auto_auto] gap-[20px] items-center bg-panel-3 px-[16px] py-[13px] font-mono text-[11.5px] text-[#c9c7ce] hover:bg-panel-4 hover:text-accent"
+                            className="grid grid-cols-[minmax(0,1fr)_auto_auto] gap-[10px] items-center bg-panel-3 px-[16px] py-[13px] font-mono text-[11.5px] text-[#c9c7ce] hover:bg-panel-4 hover:text-accent sm:gap-[20px]"
                           >
                             <span className="overflow-hidden text-ellipsis whitespace-nowrap">{a.name}</span>
                             <span className="text-dim text-[10px] tracking-[.1em]">{a.size ? fmtBytes(a.size) : "source"}</span>

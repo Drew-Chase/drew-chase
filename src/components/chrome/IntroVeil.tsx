@@ -55,7 +55,7 @@ export default function IntroVeil({target}: {target?: number}) {
             </div>
             <div
                 ref={loaderRef}
-                className="fixed inset-0 z-[999] flex flex-col justify-end bg-base p-[44px] transition-[opacity,visibility] duration-500"
+                className="fixed inset-0 z-[999] flex flex-col justify-end bg-base p-[24px] transition-[opacity,visibility] duration-500 sm:p-[44px]"
             >
                 <div className="flex items-end justify-between gap-[30px]">
                     <div className="font-mono text-[10px] tracking-[.3em] uppercase text-accent">
@@ -64,7 +64,7 @@ export default function IntroVeil({target}: {target?: number}) {
                     </div>
                     <div
                         ref={counterRef}
-                        className="font-display font-extrabold text-[clamp(70px,16vw,220px)] leading-[.8] tracking-[-.04em] text-ink"
+                        className="font-display font-extrabold text-[clamp(56px,16vw,220px)] leading-[.8] tracking-[-.04em] text-ink"
                     >
                         000
                     </div>

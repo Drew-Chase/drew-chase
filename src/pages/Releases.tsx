@@ -13,6 +13,7 @@ import {
 import type { Profile, Release, Repo } from "../lib/gh";
 import ReleaseRow from "../components/releases/ReleaseRow";
 import Magnet from "../components/chrome/Magnet";
+import {usePageMeta} from "../lib/meta";
 
 const SORTS = [
   { key: "pushed", label: "Recently pushed" },
@@ -30,6 +31,7 @@ interface LangChip {
 }
 
 export default function Releases() {
+  usePageMeta("Releases & Downloads — Drew Chase", "Every public repository, pulled live from GitHub. Tagged versions, changelogs and downloadable build artifacts.");
   const [repos, setRepos] = useState<Repo[]>([]);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [query, setQuery] = useState("");
@@ -137,8 +139,8 @@ export default function Releases() {
           <span className="font-mono text-[11px] tracking-[.18em] uppercase text-mute">← Drew Chase</span>
         </Link>
         <div className="flex items-center gap-[16px] font-mono text-[10px] tracking-[.16em] uppercase text-dim">
-          <span>{statusLine}</span>
-          <a href="https://github.com/Drew-Chase?tab=repositories" target="_blank" rel="noreferrer" data-magnet="1" className="text-mute hover:text-accent-hi">
+          <span className="hidden sm:inline">{statusLine}</span>
+          <a href="https://github.com/Drew-Chase?tab=repositories" target="_blank" rel="noreferrer" data-magnet="1" className="text-mute hover:text-accent-hi whitespace-nowrap">
             GitHub ↗
           </a>
         </div>
@@ -147,7 +149,7 @@ export default function Releases() {
       <header className="p-[74px_34px_44px] border-b border-white/8">
         <div className="max-w-[1440px] mx-auto">
           <div className="font-mono text-[10px] tracking-[.26em] uppercase text-dim mb-[18px]">Index · Versions · Downloads</div>
-          <h1 className="font-display font-extrabold text-[clamp(42px,8vw,132px)] leading-[.84] tracking-[-.045em] uppercase mb-[24px]">
+          <h1 className="font-display font-extrabold text-[min(7vw,132px)] leading-[.84] tracking-[-.045em] uppercase mb-[24px]">
             The whole<br /><span className="text-accent">paper trail.</span>
           </h1>
           <p className="max-w-[640px] text-[16px] leading-[1.66] text-body text-pretty">
@@ -156,8 +158,8 @@ export default function Releases() {
         </div>
       </header>
 
-      <div className="grid grid-cols-[280px_minmax(0,1fr)] max-w-[1440px] mx-auto items-start">
-        <aside className="sticky top-[61px] flex flex-col gap-[34px] border-r border-white/8 p-[34px_26px_60px_34px]">
+      <div className="grid grid-cols-1 max-w-[1440px] mx-auto items-start lg:grid-cols-[280px_minmax(0,1fr)]">
+        <aside className="flex flex-col gap-[34px] border-b border-white/8 p-[34px_26px_44px_34px] lg:sticky lg:top-[61px] lg:border-b-0 lg:border-r lg:border-r-white/8 lg:p-[34px_26px_60px_34px]">
           <div>
             <div className="font-mono text-[10px] tracking-[.2em] uppercase text-dim mb-[12px]">Search</div>
             <Input

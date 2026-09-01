@@ -27,7 +27,7 @@ export default function Nav({progressRef}: {progressRef: RefObject<HTMLDivElemen
                 <div ref={progressRef} className="h-full w-0 bg-accent"/>
             </div>
             <nav className="fixed top-0 inset-x-0 z-[80] grid grid-cols-[1fr_auto_1fr] items-center gap-[20px] p-[20px_30px] bg-[linear-gradient(180deg,rgba(10,10,11,.95),rgba(10,10,11,0))] backdrop-blur-[4px]">
-                <a href="#top" className="justify-self-start flex items-center gap-[10px] text-ink">
+                <a href="#top" className="justify-self-start flex items-center gap-[10px] text-ink whitespace-nowrap">
                     <span className="size-[9px] rounded-full bg-accent"/>
                     <span className="font-display font-extrabold text-[15px] tracking-[-.01em] uppercase">Drew Chase</span>
                 </a>
@@ -39,7 +39,7 @@ export default function Nav({progressRef}: {progressRef: RefObject<HTMLDivElemen
                     ))}
                 </div>
                 <div className="flex items-center gap-[14px] justify-self-end">
-                    <span className="font-mono text-[10px] tracking-[.16em] uppercase text-faint">{clock}</span>
+                    <span className="hidden sm:block font-mono text-[10px] tracking-[.16em] uppercase text-faint">{clock}</span>
                     <Button
                         onPress={() => navigate("/releases")}
                         data-magnet="1"

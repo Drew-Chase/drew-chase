@@ -44,7 +44,7 @@ function StatsCells({ stats }: { stats: Stat[] }) {
   }, []);
 
   return (
-    <div ref={ref} data-stage="2" className="grid grid-cols-[repeat(auto-fit,minmax(210px,1fr))]">
+    <div ref={ref} data-stage="2" className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,210px),1fr))]">
       {stats.map(s => (
         <div key={s.label} className="border-b border-r border-white/12 p-[34px_20px_30px]">
           <div
@@ -83,12 +83,12 @@ export default function SignalSection({
   return (
     <section ref={ref} id="signal" data-panel="Signal" className="relative overflow-hidden p-[110px_30px]">
       <div data-stage="1">
-        <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,320px)] items-end gap-[40px] border-b border-white/14 pb-[22px]">
+        <div className="grid grid-cols-1 gap-[24px] border-b border-white/14 pb-[22px] lg:grid-cols-[minmax(0,1fr)_minmax(0,320px)] lg:items-end lg:gap-[40px]">
           <div>
             <div className="mb-[16px] font-mono text-[10px] tracking-[.3em] uppercase text-hot">[ 02 ] Signal</div>
             <h2
               data-trace
-              className="m-0 font-display font-extrabold text-[clamp(40px,7.4vw,128px)] leading-[.84] tracking-[-.04em] uppercase"
+              className="m-0 font-display font-extrabold text-[min(7.2vw,128px)] leading-[.84] tracking-[-.04em] uppercase"
             >
               <span data-line="ink" className="block" style={{ WebkitTextStroke: "1.1px #f4f2ed" }}>
                 A decade
@@ -110,7 +110,7 @@ export default function SignalSection({
 
         <StatsCells stats={stats} />
 
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(400px,1fr))]">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,400px),1fr))]">
           <div className="min-w-0 border-b border-r border-white/12 p-[38px_24px_20px]">
             <div className="mb-[10px] flex items-baseline justify-between gap-[20px]">
               <h3 className="m-0 font-mono text-[11px] font-bold tracking-[.22em] uppercase text-ink">

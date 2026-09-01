@@ -16,9 +16,9 @@ export default function AboutSection({years}: {years: number | string}) {
         <section ref={ref} id="about" data-panel="About" className="p-[110px_30px] overflow-hidden">
             <div data-stage="1">
                 <div className="font-mono text-[10px] tracking-[.3em] uppercase text-hot mb-[16px]">[ 04 ] About</div>
-                <div className="grid grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] gap-[70px] items-start">
+                <div className="grid grid-cols-1 gap-[40px] items-start lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] lg:gap-[70px]">
                     <div>
-                        <h2 data-trace className="font-display font-extrabold text-[clamp(32px,4.6vw,76px)] leading-[.9] tracking-[-.04em] uppercase mb-[34px] [text-wrap:pretty]">
+                        <h2 data-trace className="font-display font-extrabold text-[min(6.2vw,76px)] leading-[.9] tracking-[-.04em] uppercase mb-[34px] [text-wrap:pretty]">
                             <span className="block" data-line="ink" style={{WebkitTextStroke: "1px #f4f2ed"}}>I'd rather own the box</span>
                             <span className="block text-accent" data-line="acid" style={{WebkitTextStroke: "1px #d8fb3c"}}>than rent the abstraction.</span>
                         </h2>
