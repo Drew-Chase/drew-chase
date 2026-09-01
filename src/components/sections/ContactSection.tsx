@@ -34,7 +34,7 @@ export default function ContactSection({repoCount}: {repoCount: number}) {
                     href="mailto:hello@example.com"
                     data-trace
                     data-ghost-all
-                    className="block font-display font-extrabold text-[clamp(40px,9.4vw,190px)] leading-[.86] tracking-[-.05em] uppercase text-transparent mb-[46px] transition-[color] duration-300 hover:text-accent hover:[-webkit-text-stroke-color:#d8fb3c]"
+                    className="block font-display font-extrabold text-[clamp(40px,9.4vw,190px)] leading-[.86] tracking-[-.05em] uppercase text-transparent mb-[46px] transition-[color,-webkit-text-stroke-color] duration-300 hover:text-accent hover:[-webkit-text-stroke-color:#d8fb3c]"
                     style={{WebkitTextStroke: "1.6px #f4f2ed"}}
                 >
                     <span className="block">Let's build</span>

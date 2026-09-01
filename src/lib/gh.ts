@@ -331,7 +331,7 @@ export function relTime(s?: string): string {
 }
 
 export const LANG_COLOR: Record<string, string> = {
-  Rust: "#ffb340", TypeScript: "#4fd8e8", JavaScript: "#f0d264", "C++": "#8b7fe8",
+  Rust: "#dea584", TypeScript: "#4fd8e8", JavaScript: "#f0d264", "C++": "#8b7fe8",
   "C#": "#b487f0", Java: "#e88b6a", PHP: "#7f8be8", Python: "#5ae0a0", C: "#a0a6b4",
   HTML: "#e86a5a", CSS: "#6a9ae8", Shell: "#9ae86a", Vue: "#5ae0a0", Kotlin: "#e0a05a",
   Blade: "#e05a7a", Dart: "#5ac8e0", Lua: "#5a7ae0", Batchfile: "#8a8a92",

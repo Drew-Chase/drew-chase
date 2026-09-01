@@ -19,8 +19,10 @@ function stageChildren(panel: Element): HTMLElement[] {
 /**
  * Scroll choreography for a [data-panel] section: hides [data-stage] children
  * while off-screen, then on enter plays staggered revealBlur on them plus the
- * outline-trace on any [data-trace] heading (per-line via data-line="ink" |
- * "acid" | "ghost"). A safety timer guarantees nothing stays hidden.
+ * outline-trace on any [data-trace] heading (per line: traceAcid when the line
+ * carries data-line="acid", traceGhost for data-ghost lines or a
+ * data-ghost-all heading, traceInk otherwise). A safety timer guarantees
+ * nothing stays hidden.
  */
 export function useReveal(ref: RefObject<HTMLElement | null>) {
   useEffect(() => {

@@ -142,7 +142,7 @@ export default function ReleaseRow({ repo, index, open, loading, releases, onTog
                     <div className="p-[24px] min-w-0">
                       <div className="font-mono text-[9.5px] tracking-[.2em] uppercase text-faint mb-[14px]">Changelog</div>
                       <div
-                        className="cl text-[13.5px] leading-[1.68] text-body max-w-[780px] mb-[22px]"
+                        className="cl text-[13.5px] leading-[1.68] text-[#b6b4bb] max-w-[780px] mb-[22px]"
                         dangerouslySetInnerHTML={{ __html: md(v.body) }}
                       />
                       <div className="font-mono text-[9.5px] tracking-[.2em] uppercase text-faint mb-[12px]">Downloads</div>
